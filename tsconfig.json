@@ -1,0 +1,28 @@
+{
+  // Visit https://aka.ms/tsconfig to read more about this file
+  "compilerOptions": {
+    // Environment Settings
+    // "nodenext" follows the "type" field in package.json, which is "commonjs"
+    // here, matching the way Playwright transpiles and loads the specs.
+    // See also https://aka.ms/tsconfig/module
+    "module": "nodenext",
+    "target": "es2022",
+    "lib": ["es2022", "dom"],
+    "types": ["node"],
+
+    // Playwright transpiles the tests itself, so tsc is only a type checker here.
+    "noEmit": true,
+
+    // Stricter Typechecking Options
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    // Recommended Options
+    "strict": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
+    "skipLibCheck": true
+  },
+  "include": ["tests", "POM", "playwright.config.ts"]
+}
