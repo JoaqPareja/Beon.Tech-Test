@@ -97,7 +97,7 @@ The `PUT /booking/:id` step, via [POM/API/UpdateBooking.ts](POM/API/UpdateBookin
 3. **Log in** — fill username and password, asserting each field's value after filling, then click the login button.
 4. Post-login assertions — URL contains `/inventory.html` and the `Swag Labs` header is visible.
 
-The page object exposes locators built on Sauce Demo's `data-test` attributes (`username`, `password`, `login-button`) plus `.login_logo`, and wraps the four actions (`visitSauceDemo`, `fillLogin`, `fillPassword`, `clickLoginButton`). Using `data-test` hooks rather than CSS/text is the right call — they survive restyling.
+The page object exposes locators built on Sauce Demo's `data-test` attributes (`username`, `password`, `login-button`) plus `.login_logo`, and wraps the four actions (`visitSauceDemo`, `fillLogin`, `fillPassword`, `clickLoginButton`).
 
 ---
 
