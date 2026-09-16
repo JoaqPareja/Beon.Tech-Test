@@ -74,7 +74,7 @@ npx tsc --noEmit                         # type-check
 [tests/SmokeTest/API/Restful-Booker.spec.ts](tests/SmokeTest/API/Restful-Booker.spec.ts) — five tests that form one sequential lifecycle, all passing. The booking id created by test 2 is carried through tests 3-5 in a module-level `customerInformation` object, so a single record is created, read, updated and then deleted. Each test maps to one stage of the exercise brief, with the brief's acceptance criteria kept inline as comments.
 
 ### 1. `Check Authorization`
-`POST /auth` with `TEST_USER` / `TEST_PASSWORD` via [POM/API/Authorization.ts](POM/API/Authorization.ts). Split into two `test.step`s: asserts `200`, then parses the body and asserts the returned `token` is non-empty. The token is stored in a module-level `localToken` object (see Issues).
+`POST /auth` with `TEST_USER` / `TEST_PASSWORD` via [POM/API/Authorization.ts](POM/API/Authorization.ts). Split into two `test.step`s: asserts `200`, then parses the body and asserts the returned `token` is non-empty. 
 
 ### 2. `Create Bookin`
 `POST /booking` via [POM/API/CreateBooking.ts](POM/API/CreateBooking.ts) with a fixed payload (`Jim Brown`, price `111`, check-in `2018-01-01`, check-out `2019-01-01`, `additionalneeds: "Breakfast"` typed by the `additionalneeds` union in [Helpers/Types.ts](Helpers/Types.ts)). Asserts `200`, that `bookingid` is present, and that the echoed `totalprice` and both booking dates match what was sent. Saves `bookingid` into `customerInformation.Id` for the following tests.
@@ -86,7 +86,7 @@ npx tsc --noEmit                         # type-check
 The `PUT /booking/:id` step, via [POM/API/UpdateBooking.ts](POM/API/UpdateBooking.ts) against the id from test 2. Sends a full replacement payload — renamed to `Joaquin Pareja`, price `+10`, dates moved to 2027 — with the `Authorization` header the API requires for writes. Asserts `200` and then every changed field (`firstname`, `lastname`, `totalprice`, both dates) on the response, which `PUT` returns flat rather than wrapped in a `booking` object the way `POST` does. Because the id is left untouched, test 5 goes on to delete this same updated record.
 
 ### 5. `Delete Booking`
-`DELETE /booking/:id` via [POM/API/Delete.ts](POM/API/Delete.ts), asserting `201`, then re-issues the `GET` from test 3 and asserts `404` — confirming the deletion actually removed the record rather than trusting the status code alone. This is the strongest test in the file. Auth for the delete comes from a hard-coded `Basic` header in the service object (see Issues).
+`DELETE /booking/:id` via [POM/API/Delete.ts](POM/API/Delete.ts), asserting `201`, then re-issues the `GET` from test 3 and asserts `404` — confirming the deletion actually removed the record rather than trusting the status code alone. 
 
 ## The UI test
 
